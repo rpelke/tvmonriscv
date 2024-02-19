@@ -1,0 +1,11 @@
+.venv
+.vscode
+.pkl_memoize_py3
+*.so
+*.h5
+llvm
+tools
+!tools/readme.md
+tvm
+lib
+__pycache__
