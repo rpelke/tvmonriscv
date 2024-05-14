@@ -3,7 +3,7 @@ import tvm
 import tvm.relay.testing.tf as tf_testing
 import numpy as np
 
-from modify.MaxPool2DCallback import *
+from modify.MaxPool2DStrategy import *
 
 import os
 repo_path = os.path.abspath(
@@ -41,10 +41,13 @@ def build_lq_lib(nn_model, nn_name: str, batch: int, store_path: str, cc: str) -
         mod, params = tvm.relay.frontend.keras.from_keras(model=nn_model, shape=shape_dict, layout=layout)
         
         print(mod)
-        mod["main"] = rewrite(MaxPool2DCallback(), mod["main"])
-        print(mod)
-        
-        with tvm.transform.PassContext(opt_level=3):
+        opt_config = {
+            "tir.add_lower_pass": [
+                # Add lowering passes here
+            ]
+        }
+
+        with tvm.transform.PassContext(config=opt_config, opt_level=2):
             lib = tvm.relay.build(mod, target=target, params=params)
         
         inp_shape_str = ''.join([str(i) + 'x' for i in in_data[0].shape])[:-1]

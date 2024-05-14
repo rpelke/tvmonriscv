@@ -3,6 +3,9 @@ from tvm.relay.dataflow_pattern import *
 
 
 class MaxPool2DCallback(DFPatternCallback):
+    """This is an example on how to replace patterns on a relay level.
+    Call this class using: mod["main"] = rewrite(MaxPool2DCallback(), mod["main"])
+    """
     def __init__(self, require_type=False, rewrite_once=False):
         super().__init__(require_type, rewrite_once)
         self.pool2d_input = wildcard()
