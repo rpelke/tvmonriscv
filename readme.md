@@ -50,7 +50,7 @@ The `nm` command is used to display symbol information of the shared library.
 Build the RISC-V toolchain to get a cross-compiler and QEMU:
 ```bash
 cd tools
-git clone --depth=1 https://github.com/riscv/riscv-gnu-toolchain
+git clone https://github.com/riscv/riscv-gnu-toolchain
 cd riscv-gnu-toolchain
 git checkout 710a81b
 mkdir -p riscv-gnu-toolchain/build/release/build
