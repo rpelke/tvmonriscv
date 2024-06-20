@@ -9,3 +9,8 @@ tools
 tvm
 lib
 __pycache__
+compile_commands.json
+build
+.cache
+crt_include
+standalone_crt

@@ -105,4 +105,17 @@ chmod +x lib/vec_add_c
 To disassemble files containing instructions from the vector extension, the following might work better than the `objdump` from the RISC-V toolchain:
 ```bash
 llvm/build/release/bin/llvm-objdump -d models/mnist_cnn_input_1x28x28x1_lib.so
-````
+```
+
+
+### Crosscompile Static for RISC-V (Without dlopen)
+```bash
+cd compile_static
+./build.bash
+../tools/riscv-gnu-toolchain/build/release/bin/qemu-riscv64 \
+	build/release/build/demo_static \
+	build/release/build/build_model_output/cat.bin
+../tools/riscv-gnu-toolchain/build/release/bin/qemu-riscv64 \
+	build/debug/build/demo_static \
+	build/debug/build/build_model_output/cat.bin
+```
