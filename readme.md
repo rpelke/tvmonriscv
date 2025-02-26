@@ -76,6 +76,12 @@ chmod +x examples/build_static_riscv.bash
 ./examples/build_static_riscv.bash
 ```
 
+Inject your own functions before/after each layer for tracing:
+```bash
+chmod +x examples/host_mnist_dlopen_gprof.bash
+./examples/host_mnist_dlopen_gprof.bash
+```
+
 
 ### Use RISC-V Vector Extension
 The current TVM version does not support the RISC-V vector extension. To use vector instructions, we use TVM to compile to C code. Then, we use a Clang cross-compiler to make use of LLVM's auto-vectorization features.

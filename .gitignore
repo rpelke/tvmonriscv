@@ -14,3 +14,7 @@ build
 .cache
 crt_include
 standalone_crt
+
+# gprov
+gmon.out
+*.txt

@@ -17,6 +17,7 @@ cd build/release/build
 
 export TVM_ROOT=$DIR/tvm
 export CXX=${DIR}/tools/riscv-gnu-toolchain/build/release/bin/riscv64-unknown-linux-gnu-g++
+export TVM_NUM_THREADS=1
 
 cmake -DTVM_ROOT=$TVM_ROOT \
     -DCMAKE_BUILD_TYPE=Release \
