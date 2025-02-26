@@ -8,6 +8,7 @@ while [ -h "$SOURCE" ]; do
     [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
 done
 DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+DIR=$DIR/../
 
 rm -rf ${DIR}/build
 rm ${DIR}/models/*.so

@@ -66,14 +66,14 @@ Further information about deployment using the TVM C++ runtime can be found [her
 
 Native execution:
 ```bash
-chmod +x build_static_host.bash
-./build_static_host.bash
+chmod +x examples/build_static_host.bash
+./examples/build_static_host.bash
 ```
 
 Execution in RISC-V QEMU:
 ```bash
-chmod +x build_static_riscv.bash
-./build_static_riscv.bash
+chmod +x examples/build_static_riscv.bash
+./examples/build_static_riscv.bash
 ```
 
 
