@@ -46,7 +46,7 @@ The `ldd` command is used to display the shared library dependencies of the shar
 The `nm` command is used to display symbol information of the shared library.
 
 
-### Execute TVM Output on RISC-V QEMU (64 Bit)
+### Build RISC-V QEMU (64 Bit)
 Build the RISC-V toolchain to get a cross-compiler and QEMU:
 ```bash
 cd tools
@@ -59,23 +59,21 @@ cd riscv-gnu-toolchain/build/release/build
 make -j `nproc` linux  
 make -j `nproc` build-sim SIM=qemu
 cd ../../../../../
-export CXX=${PWD}/tools/riscv-gnu-toolchain/build/release/bin/riscv64-unknown-linux-gnu-g++
-export TVM_ROOT=${PWD}/tvm
-export DMLC_CORE=${TVM_ROOT}/3rdparty/dmlc-core
 ```
 
-Cross compile the NN for RISC-V and start using QEMU:
-```bash
-cd execute
-make lib/libtvm_runtime_pack.o
-make lib/cpp_mnist_pack
-```
+### (Cross-)Compile MNIST for the host computer or RISC-V QEMU.
 Further information about deployment using the TVM C++ runtime can be found [here](https://github.com/apache/tvm/tree/main/apps/howto_deploy).
-Execute ML model:
+
+Native execution:
 ```bash
-python3 compile/crosscompile_mnist_riscv.py
-cd models
-../tools/riscv-gnu-toolchain/build/release/bin/qemu-riscv64 ../execute/lib/cpp_mnist_pack
+chmod +x build_static_host.bash
+./build_static_host.bash
+```
+
+Execution in RISC-V QEMU:
+```bash
+chmod +x build_static_riscv.bash
+./build_static_riscv.bash
 ```
 
 

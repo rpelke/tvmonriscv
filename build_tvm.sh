@@ -28,6 +28,7 @@ cmake \
     -DUSE_RELAY_DEBUG=ON \
     -DUSE_MICRO=ON \
     -DUSE_UMA=ON \
+    -DUSE_CPP_RPC=ON \
     -G Ninja \
     ../../..
 

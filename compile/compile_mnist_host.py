@@ -55,5 +55,5 @@ def build_lq_lib(nn_model, nn_name: str, batch: int, store_path: str) -> str :
 
 nn_name = 'mnist_cnn'
 model = tf.keras.models.load_model(f'{repo_path}/models/{nn_name}.h5')
-lib_name = build_lq_lib(model, nn_name=nn_name, batch=16, store_path=f'{repo_path}/models')
+lib_name = build_lq_lib(model, nn_name=nn_name, batch=1, store_path=f'{repo_path}/models')
 print(f'Created lib {lib_name} in {repo_path}/models/')
