@@ -10,6 +10,15 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 DIR=$DIR/../
 
+PROFILING=false
+for arg in "$@"
+do
+    if [ "$arg" == "--profiling" ]; then
+        PROFILER_FLAG="-DPROFILER=ON"
+        PROFILING=true
+    fi
+done
+
 rm -rf ${DIR}/build
 rm ${DIR}/models/*.so
 mkdir -p build/release/build
@@ -24,6 +33,7 @@ cmake -DTVM_ROOT=$TVM_ROOT \
     -DCMAKE_INSTALL_PREFIX=../ \
     -DCMAKE_CXX_COMPILER=${CXX} \
     -DCMAKE_CXX_FLAGS="-march=rv64imafcv" \
+    ${PROFILER_FLAG} \
     ../../../
 
 make install
@@ -32,7 +42,12 @@ make install
 cd $DIR
 export PYTHONPATH=${DIR}/tvm/python
 export TVM_LIBRARY_PATH=${DIR}/tvm/build/debug/build
-python3 compile/crosscompile_mnist_riscv.py
+
+if $ENABLE_PROFILING; then
+    python3 compile/crosscompile_mnist_riscv_profiler.py
+else
+    python3 compile/crosscompile_mnist_riscv.py
+fi
 
 # QEMU execution
 export LD_LIBRARY_PATH=${DIR}/models:${DIR}/build/release/lib

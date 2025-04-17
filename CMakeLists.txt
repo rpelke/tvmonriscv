@@ -25,9 +25,9 @@ add_library(tvm_runtime_pack SHARED ${SOURCES_RT})
 target_compile_definitions(tvm_runtime_pack PUBLIC -DDMLC_USE_LOGGING_LIBRARY=\<tvm/runtime/logging.h\>)
 install(TARGETS tvm_runtime_pack DESTINATION lib)
 
-option(GPROF_CUSTOM_FUNCTIONS "Build with gprof and custom functions." OFF)
+option(PROFILER "Build with profiler." OFF)
 
-if(GPROF_CUSTOM_FUNCTIONS)
+if(PROFILER)
     # Compile functions.cc as shared library
     set(PREV_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")

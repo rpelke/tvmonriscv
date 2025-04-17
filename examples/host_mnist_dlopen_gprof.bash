@@ -24,7 +24,7 @@ cmake -DTVM_ROOT=$TVM_ROOT \
     -DCMAKE_BUILD_TYPE=Debug \
     -DCMAKE_INSTALL_PREFIX=../ \
     -DCMAKE_CXX_COMPILER=${CXX} \
-    -DGPROF_CUSTOM_FUNCTIONS=ON \
+    -DPROFILER=ON \
     -DCMAKE_CXX_FLAGS="-g -pg" \
     ../../../
 
@@ -34,7 +34,7 @@ make install
 cd $DIR
 export PYTHONPATH=${DIR}/tvm/python
 export TVM_LIBRARY_PATH=${DIR}/tvm/build/debug/build
-python3 compile/compile_mnist_host_gprof.py
+python3 compile/compile_mnist_host_gprof_profiler.py
 
 # Native execution with gprof
 export LD_LIBRARY_PATH=${DIR}/models:${DIR}/build/debug/lib

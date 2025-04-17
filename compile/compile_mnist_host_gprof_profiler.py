@@ -51,7 +51,7 @@ def build_lq_lib(nn_model, nn_name: str, batch: int, store_path: str) -> str :
             ]
         }
         
-        with tvm.transform.PassContext(config=opt_config, opt_level=2):
+        with tvm.transform.PassContext(config=opt_config, opt_level=4):
             lib = tvm.relay.build(mod, target=target, params=params)
         
         inp_shape_str = ''.join([str(i) + 'x' for i in in_data[0].shape])[:-1]

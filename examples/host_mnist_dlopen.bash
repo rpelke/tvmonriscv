@@ -10,6 +10,15 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 DIR=$DIR/../
 
+PROFILING=false
+for arg in "$@"
+do
+    if [ "$arg" == "--profiling" ]; then
+        PROFILER_FLAG="-DPROFILER=ON"
+        PROFILING=true
+    fi
+done
+
 rm -rf ${DIR}/build
 rm ${DIR}/models/*.so
 mkdir -p build/release/build
@@ -23,6 +32,7 @@ cmake -DTVM_ROOT=$TVM_ROOT \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=../ \
     -DCMAKE_CXX_COMPILER=${CXX} \
+    ${PROFILER_FLAG} \
     ../../../
 
 make install
@@ -31,7 +41,12 @@ make install
 cd $DIR
 export PYTHONPATH=${DIR}/tvm/python
 export TVM_LIBRARY_PATH=${DIR}/tvm/build/debug/build
-python3 compile/compile_mnist_host.py
+
+if $PROFILING; then
+    python3 compile/compile_mnist_host_profiler.py
+else
+    python3 compile/compile_mnist_host.py
+fi
 
 # Native execution
 export LD_LIBRARY_PATH=${DIR}/models:${DIR}/build/release/lib

@@ -67,13 +67,13 @@ Further information about deployment using the TVM C++ runtime can be found [her
 Native execution:
 ```bash
 chmod +x examples/build_static_host.bash
-./examples/build_static_host.bash
+./examples/build_static_host.bash [optional: --profiling]
 ```
 
 Execution in RISC-V QEMU:
 ```bash
 chmod +x examples/build_static_riscv.bash
-./examples/build_static_riscv.bash
+./examples/build_static_riscv.bash [optional: --profiling]
 ```
 
 Inject your own functions before/after each layer for tracing:
