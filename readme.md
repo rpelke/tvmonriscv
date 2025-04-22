@@ -53,8 +53,8 @@ cd tools
 git clone https://github.com/riscv/riscv-gnu-toolchain
 cd riscv-gnu-toolchain
 git checkout 710a81b
-mkdir -p riscv-gnu-toolchain/build/release/build
-cd riscv-gnu-toolchain/build/release/build
+mkdir -p ./build/release/build
+cd ./build/release/build
 ../../../configure --prefix=${PWD}/.. --enable-llvm
 make -j `nproc` linux  
 make -j `nproc` build-sim SIM=qemu
@@ -66,17 +66,17 @@ Further information about deployment using the TVM C++ runtime can be found [her
 
 Native execution:
 ```bash
-chmod +x examples/build_static_host.bash
-./examples/build_static_host.bash [optional: --profiling]
+chmod +x examples/host_mnist_dlopen.bash
+./examples/host_mnist_dlopen.bash [optional: --profiling]
 ```
 
 Execution in RISC-V QEMU:
 ```bash
-chmod +x examples/build_static_riscv.bash
-./examples/build_static_riscv.bash [optional: --profiling]
+chmod +x examples/riscv_mnist_dlopen.bash
+./examples/riscv_mnist_dlopen.bash [optional: --profiling]
 ```
 
-Inject your own functions before/after each layer for tracing:
+Execution with gprof:
 ```bash
 chmod +x examples/host_mnist_dlopen_gprof.bash
 ./examples/host_mnist_dlopen_gprof.bash
